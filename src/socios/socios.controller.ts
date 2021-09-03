@@ -2,6 +2,7 @@ import { Controller,Get,Post,Put,Delete, Res, HttpStatus, Body, Param ,NotFoundE
 import { Request } from 'express';
 import { SociosService } from "./socios.service";
 import { CreatePartnerDTO } from './dto/socio.dto';
+import { Public } from 'src/auth/custom-decorator';
 @Controller('socios')
 export class SociosController {
 
@@ -16,6 +17,7 @@ export class SociosController {
         socio: socio
     });
 }
+
 @Get('/')
 async getSocios(@Res() res)
 {
