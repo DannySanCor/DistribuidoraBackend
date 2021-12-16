@@ -1,4 +1,5 @@
 import { Schema } from "mongoose";
+import { Any } from "typeorm";
 
 export const SocioSchema = new Schema ({
      partnerName:{type: String, required:true},
@@ -7,7 +8,7 @@ export const SocioSchema = new Schema ({
     phoneNumber:Number,
     description:String,
     imageUrl:String,
-    idPartner:String,
+    idPartner:Number,
     totalVolume:String,
     levelVol:String,
     levelStatus:String,
@@ -17,5 +18,7 @@ export const SocioSchema = new Schema ({
     createdAt: {
         type: Date,
         default:Date.now
-    }
+    },
+    tagActive:Number,
+    tagDelete:Number
 });

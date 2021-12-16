@@ -6,7 +6,7 @@ export class CreatePartnerDTO
    readonly phoneNumber:number;
    readonly description:string;
    readonly imageUrl:string;
-   readonly idPartner:number;
+   public idPartner:number;
    readonly totalVolume:string;
    readonly levelVol:string;
    readonly levelStatus:string;
@@ -14,5 +14,6 @@ export class CreatePartnerDTO
    readonly levelRecruited:string;
    readonly levelRecruitedStatus:string;
    readonly createdAt:Date;
-
+   public tagActive:number;
+   public tagDelete:number;
 }

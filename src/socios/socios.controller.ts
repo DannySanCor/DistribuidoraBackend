@@ -11,13 +11,21 @@ export class SociosController {
     }
 @Post('/create')
  async createPost(@Res() res, @Body() createPartnerDTO: CreatePartnerDTO){
+     
+    const lastSocio:any = await this.getLastSocio();
+    console.log(lastSocio);
+     createPartnerDTO.idPartner = lastSocio[0].idPartner + 1;
+     createPartnerDTO.tagActive = 1;
+     createPartnerDTO.tagDelete = 0;
+     console.log(createPartnerDTO);
     const socio = await this.sociosService.createSocio(createPartnerDTO);  
     return res.status(HttpStatus.OK).json({
         message:'Nuevo Socio Registrado Satisfactoriamente',
         socio: socio
     });
 }
-
+//Con decorador Public no hay necesidad de generar token
+@Public()
 @Get('/')
 async getSocios(@Res() res)
 {
@@ -27,6 +35,14 @@ async getSocios(@Res() res)
         partners
     })
 }
+@Public()
+@Get('/lastPartner')
+async getLastSocio()
+{
+    const Lastpartner = await this.sociosService.getLastSocio();
+   return Lastpartner;
+}
+
 @Get('/:socioID')
 async getSocio(@Res() res, @Param('socioID') socioID)
 {
