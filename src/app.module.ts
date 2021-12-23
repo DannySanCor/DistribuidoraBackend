@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 
 import { AppService } from './app.service';
 
-import { MongooseModule } from '@nestjs/mongoose';
+import {MongooseModule} from '@nestjs/mongoose'
 import { SociosModule } from './socios/socios.module';
 import { AppController } from './app.controller';
 import { SociosService } from './socios/socios.service';
@@ -15,7 +15,8 @@ import { JwtAuthGuard} from "./auth/jwt-auth.guard"
   imports: [SociosModule,
     MongooseModule.forRoot('mongodb://localhost/distribuidora-nest',
     {
-      useNewUrlParser:true
+      useNewUrlParser:true,
+      useUnifiedTopology: true
     }),
     AuthModule,
     UsersModule],
