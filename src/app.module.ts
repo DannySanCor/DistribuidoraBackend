@@ -10,16 +10,17 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard} from "./auth/jwt-auth.guard"
+import { UsersController } from './users/users.controller';
 
 @Module({
-  imports: [SociosModule,
+  imports: [SociosModule,UsersModule,
     MongooseModule.forRoot('mongodb://localhost/distribuidora-nest',
     {
       useNewUrlParser:true
     }),
     AuthModule,
-    UsersModule],
-  controllers: [AppController],
+    ],
+  controllers: [AppController, UsersController],
   providers: [AppService,{provide:APP_GUARD,
     useClass: JwtAuthGuard},],
 })

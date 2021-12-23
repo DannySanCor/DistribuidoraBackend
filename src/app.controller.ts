@@ -3,6 +3,7 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { LocalAuthGuard } from './auth/local-auth.guard';
 import { AuthService } from './auth/auth.service';
 import { Public } from './auth/custom-decorator';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller()
 export class AppController {
@@ -11,13 +12,16 @@ export class AppController {
   @UseGuards(LocalAuthGuard)
   @Public()
   @Post('auth/login')
+  
   async login(@Request() req) {
-    return this.authService.login(req.user);
+   const data = await this.authService.login(req.user);
+    return data
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('profile')
   getProfile(@Request() req) {
+    
     return req.user;
   }
 }
