@@ -16,7 +16,12 @@ export class SociosService {
       const socios =  await this.socioModel.find()
     return socios;
     }
-    async getSocio(productID:string):Promise<Socio>
+    async getLastSocio(): Promise <Socio[]>
+    {
+      const socio =  await this.socioModel.find().limit(1).sort({$natural:-1});
+    return socio;
+    }
+    async getSocio(productID?:string):Promise<Socio>
     {
         const socio = await this.socioModel.findById(productID);
         return socio;

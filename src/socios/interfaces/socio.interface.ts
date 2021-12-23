@@ -15,5 +15,8 @@
     readonly levelRecruited:string;
     readonly levelRecruitedStatus:string;
     readonly createdAt:Date;
+    readonly tagActive:number;
+    readonly tagDelete:number;
+
  }
  
