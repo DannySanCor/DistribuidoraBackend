@@ -1,16 +1,22 @@
 
+
+//import { hash} from 'bcrypt';
 import { UsersService } from './users.service';
+
 import { Controller,Get,Post,Put,Delete, Res, HttpStatus, Body, Param ,NotFoundException, Query} from '@nestjs/common';
 import { CreateUserDTO } from "./dto/user.dto";
 import { Public } from 'src/auth/custom-decorator';
 import { ApiBearerAuth, ApiInternalServerErrorResponse, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
+
 @Controller('users')
 @ApiTags('Users')
 @ApiBearerAuth()
 @ApiUnauthorizedResponse({ description: 'Not Authorize' })
 @ApiInternalServerErrorResponse({ description: 'Internal Server Error' })
+
 export class UsersController {
-    constructor(private userService:UsersService)
+    
+    constructor(private userService:UsersService, private saltOrRounds = 10)
     {}
     @Post('/create')
     
@@ -18,9 +24,11 @@ export class UsersController {
      
     const lastUser:any = await this.getLastUser();
     console.log(lastUser);
-    
+    /*const password:string = CreateUserDTO.password.toString();
+    const hashPass = await hash(password,this.saltOrRounds);*/
      CreateUserDTO.tagActive = 1;
      CreateUserDTO.tagDelete = 0;
+
      console.log(CreateUserDTO);
     const user = await this.userService.createUser(CreateUserDTO);  
     return res.status(HttpStatus.OK).json({
@@ -70,6 +78,9 @@ async deleteUser(@Res() res, @Query('userId') userId)
 @Put('/update')
 async updateUser(@Res() res, @Body() createUserDTO:CreateUserDTO, @Query('userId') userId)
 {
+    /*const password:string = createUserDTO.password.toString();
+    createUserDTO.password = await hash(password,this.saltOrRounds);
+    console.log(createUserDTO.password);*/
    const userUpdated = await this.userService.updateUser(userId,createUserDTO);
 
    if(!userUpdated) throw new NotFoundException('Usuario no registrado');

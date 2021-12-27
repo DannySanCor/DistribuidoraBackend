@@ -1,5 +1,4 @@
 import { Column, PrimaryGeneratedColumn,CreateDateColumn,BeforeInsert,BeforeUpdate, Entity, ObjectIdColumn } from "typeorm";
-import {hash} from "bcrypt";
 import { ObjectId } from "mongoose";
 
 @Entity('users')

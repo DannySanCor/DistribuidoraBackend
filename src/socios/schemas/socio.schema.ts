@@ -1,5 +1,4 @@
 import { Schema } from "mongoose";
-import { Any } from "typeorm";
 
 export const SocioSchema = new Schema ({
      partnerName:{type: String, required:true},

@@ -6,7 +6,7 @@ export const UserSchema = new Schema({
      userName:{type: String, required:true},
      firstName:{type: String, required:true},
      lastName:{type: String, required:true},
-     emailUser:{type: String, required:true},
+     emailUser:{type: String, required:true, index:true, unique:true},
      password:{type:String, required:true},
      address:String,
      phoneNumber:Number,

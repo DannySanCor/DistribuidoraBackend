@@ -5,7 +5,7 @@ export class CreateUserDTO
    readonly firstName:String;    
    readonly lastName:String;  
    readonly emailUser:String;      
-   readonly password:String;         
+   public password:String;         
    readonly address:String;        
    readonly phoneNumber:String;
    readonly description:String;

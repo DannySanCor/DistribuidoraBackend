@@ -17,7 +17,13 @@ import { UsersController } from './users/users.controller';
     MongooseModule.forRoot('mongodb://localhost/distribuidora-nest',
     {
       useNewUrlParser:true,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
+      autoIndex: true,
+      useCreateIndex: true,
+  //ssl: false, // check for using this option in production
+      connectTimeoutMS: 15000,
+      poolSize: 15,
+    useFindAndModify: false // <- aquí
     }),
     AuthModule,
     ],
