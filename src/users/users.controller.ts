@@ -16,7 +16,7 @@ import { ApiBearerAuth, ApiInternalServerErrorResponse, ApiTags, ApiUnauthorized
 
 export class UsersController {
     
-    constructor(private userService:UsersService, private saltOrRounds = 10)
+    constructor(private userService:UsersService)
     {}
     @Post('/create')
     

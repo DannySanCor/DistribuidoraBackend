@@ -18,12 +18,7 @@ import { UsersController } from './users/users.controller';
     {
       useNewUrlParser:true,
       useUnifiedTopology: true,
-      autoIndex: true,
-      useCreateIndex: true,
-  //ssl: false, // check for using this option in production
-      connectTimeoutMS: 15000,
-      poolSize: 15,
-    useFindAndModify: false // <- aquí
+      autoIndex: true
     }),
     AuthModule,
     ],
