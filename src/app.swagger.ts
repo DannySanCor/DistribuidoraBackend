@@ -1,14 +1,22 @@
-import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger/index";
-import { INestApplication } from "@nestjs/common";
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { INestApplication } from '@nestjs/common';
 
-export const initSwagger = (app: INestApplication)=>
-{
+export const initSwagger = (app: INestApplication) => {
     const swaggerConfig = new DocumentBuilder()
     .setTitle('Distribuidora SanCor')
-    .setDescription('Apis para el funcionamiento del sistema')
+    .addBearerAuth()
+    .setDescription('Apis para el proyecto')
     .setVersion('1.0')
-    .addTag('Apis')
+   
+    
     .build();
-  const document = SwaggerModule.createDocument(app, swaggerConfig);
-  SwaggerModule.setup('/docs', app, document);
-}
+    const document = SwaggerModule.createDocument(app, swaggerConfig);
+    SwaggerModule.setup('api/docs', app, document,{
+        explorer:true,
+        swaggerOptions:{
+          filter:true,
+          showRequestDuration:true,
+        }
+        
+      });
+};
