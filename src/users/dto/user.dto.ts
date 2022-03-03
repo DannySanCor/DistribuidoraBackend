@@ -1,16 +1,15 @@
-export class CreateUserDTO
-{
-
-   readonly userName:String;
-   readonly firstName:String;    
-   readonly lastName:String;  
-   readonly emailUser:String;      
-   public password:String;         
-   readonly address:String;        
-   readonly phoneNumber:String;
-   readonly description:String;
-   readonly imageUrl:String;
-   public tagActive:Number;
-   public tagDelete:Number;
-   readonly createdAt:Date;
+export class CreateUserDTO {
+  userName: string;
+  firstName: string;
+  lastName: string;
+  emailUser: string;
+  password: string;
+  address: string;
+  phonenumber: string;
+  description: string;
+  imageUrl: string;
+  tagActive: number;
+  tagDelete: number;
+  createdAt: Date;
+  rol: number;
 }

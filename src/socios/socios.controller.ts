@@ -11,23 +11,26 @@ import {
   NotFoundException,
   Query,
 } from '@nestjs/common';
-import { Request } from 'express';
-
-import { SociosService } from "./socios.service";
+import {
+  ApiBearerAuth,
+  ApiInternalServerErrorResponse,
+  ApiTags,
+  ApiUnauthorizedResponse,
+} from '@nestjs/swagger';
+import { SociosService } from './socios.service';
 import { CreatePartnerDTO } from './dto/socio.dto';
 import { Public } from 'src/auth/custom-decorator';
 @Controller('socios')
+@ApiTags('Socios')
+@ApiBearerAuth()
+@ApiUnauthorizedResponse({ description: 'Not Authorize' })
+@ApiInternalServerErrorResponse({ description: 'Internal Server Error' })
 export class SociosController {
+  constructor(private sociosService: SociosService) {}
 
-    constructor(private sociosService:SociosService){
-
-    }
-
-@Post('/create')
- async createPost(@Res() res, @Body() createPartnerDTO: CreatePartnerDTO){
-     
-    const lastSocio:any = await this.getLastSocio();
-    console.log(lastSocio);
+  @Post('/create')
+  async createPost(@Res() res, @Body() createPartnerDTO: CreatePartnerDTO) {
+    const lastSocio: any = await this.getLastSocio();
     createPartnerDTO.idPartner = lastSocio[0].idPartner + 1;
     createPartnerDTO.tagActive = 1;
     createPartnerDTO.tagDelete = 0;
@@ -71,11 +74,11 @@ export class SociosController {
     });
   }
 
-  @Put('/update')
+  @Put('/update/:socioID')
   async updateSocio(
     @Res() res,
     @Body() createSocioDTO: CreatePartnerDTO,
-    @Query('socioID') socioID,
+    @Param('socioID') socioID,
   ) {
     const socioUpdated = await this.sociosService.updateSocio(
       socioID,
