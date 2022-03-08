@@ -1,4 +1,3 @@
-import { OrdersService } from './orders.service';
 import {
   Controller,
   Get,
@@ -11,9 +10,8 @@ import {
   Param,
   NotFoundException,
   Query,
-  ValidationPipe,
 } from '@nestjs/common';
-import { CreateOrderDTO } from './dto/order.dto';
+
 import { Public } from 'src/auth/custom-decorator';
 import {
   ApiBearerAuth,
@@ -21,6 +19,8 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
+import { CreateOrderDTO } from './dto/order.dto';
+import { OrdersService } from './orders.service';
 
 @Controller('orders')
 @ApiTags('Orders')
@@ -31,8 +31,8 @@ export class OrdersController {
   constructor(private orderService: OrdersService) {}
 
   @Post('/create')
-  async createOrder(@Res() res, @Body() CreateOrderDTO: CreateOrderDTO) {
-    const order = await this.orderService.createOrder(CreateOrderDTO);
+  async createOrder(@Res() res, @Body() createOrderDTO: CreateOrderDTO) {
+    const order = await this.orderService.createOrder(createOrderDTO);
     return res.status(HttpStatus.OK).json({
       message: 'Nuevo Pedido Registrado Satisfactoriamente',
       user: order,
@@ -86,14 +86,14 @@ export class OrdersController {
   @Put('/update')
   async updateOrder(
     @Res() res,
-    @Body() CreateOrderDTO: CreateOrderDTO,
+    @Body() createOrderDTO: CreateOrderDTO,
     @Query('orderId') orderId,
   ) {
     console.log('Entró a controller');
 
     const orderUpdated = await this.orderService.updateOrder(
       orderId,
-      CreateOrderDTO,
+      createOrderDTO,
     );
 
     if (!orderUpdated) throw new NotFoundException('Pedido no registrado');

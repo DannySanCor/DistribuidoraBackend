@@ -12,13 +12,16 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { OrdersModule } from './orders/orders.module';
 import { ConfigModule } from '@nestjs/config';
 import { ProjectsModule } from './projects/projects.module';
+import { urlConfig } from './config/configuration';
+import { RolesModule } from './roles/roles.module';
 
 @Module({
   imports: [
     SociosModule,
     UsersModule,
     ProjectsModule,
-    MongooseModule.forRoot('mongodb://localhost/distribuidora-nest', {
+    RolesModule,
+    MongooseModule.forRoot(urlConfig, {
       useNewUrlParser: true,
     }),
     AuthModule,
